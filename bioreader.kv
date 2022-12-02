@@ -1,0 +1,80 @@
+mainBox:
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            size_hint_y: 0.1
+            canvas:
+                Color:
+                    rgba: 0, 1, 0, 1
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+            Label:
+                halign: 'left'
+                valign: 'middle'
+                size_hint: 1.0, 1.0
+                text_size: self.size
+                color: 0, 0, 0, 1
+                text: 'Header'
+
+        BoxLayout:
+            canvas:
+                Color:
+                    rgba: 1, 1, 1, 1
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+            ScrollView:
+                do_scroll_x: False
+                do_scroll_y: True
+                Label:
+                    halign: 'left'
+                    valign: 'top'
+                    height: self.texture_size[1]
+                    size_hint_y: None
+                    text_size: self.width, None
+                    font_size: f"{slider.value}dp"
+                    color: 0, 0, 0, 1
+                    markup: True
+                    text: root.text_input
+                    
+        BoxLayout:
+            size_hint_y: 0.1
+            Button:
+                text: 'Incarca un Fisier'
+                halign: 'center'
+                valign: 'middle'
+                size_hint: 1.0, 1.0
+                background_color: .6, .6, .6, 1
+                on_release:root.show_load()
+            Slider:
+                id: slider
+                min: 0
+                max: 50
+                value: 20
+                step: 1
+                orientation: 'horizontal'
+                size_hint_x: 0.5
+
+<LoadDialog>:
+    BoxLayout:
+        size: root.size
+        pos: root.pos
+        orientation: "vertical"
+        FileChooserIconView:
+            id: filechooser
+
+        BoxLayout:
+            size_hint_y: None
+            height: "48dp"
+            Button:
+                text: "Renunta"
+                on_release: root.cancel()
+
+            Button:
+                text: "Incarca"
+                on_release: root.load(filechooser.path, filechooser.selection)
+                
+
+
+            
