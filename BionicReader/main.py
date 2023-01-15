@@ -36,6 +36,7 @@ class mainBox(BoxLayout):
 
     def load(self, path, filename):
         from utility import refactoring
+        print(path, filename)
         
         with open(os.path.join(path, filename[0])) as stream:
             doc = stream.read()
@@ -58,8 +59,6 @@ class mainBox(BoxLayout):
 
 class BioReaderApp(App):
    pass
-
-
 
 if __name__ == '__main__':
     BioReaderApp().run()
